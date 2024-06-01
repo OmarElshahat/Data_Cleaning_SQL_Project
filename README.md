@@ -1,1 +1,1 @@
-# Data_Cleaning_SQL_Project
+# Cleaning housing data in SQL.
