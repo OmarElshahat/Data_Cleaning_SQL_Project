@@ -148,6 +148,6 @@ Order by PropertyAddress
 
 
 
-ALTER TABLE PortfolioProject.dbo.NashvilleHousing
+ALTER TABLE `data_cleaning`.`nashville housing`
 DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate
 
