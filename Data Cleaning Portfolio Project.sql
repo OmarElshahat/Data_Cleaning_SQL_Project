@@ -47,17 +47,17 @@ SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress) -1 ) as Address
 FROM `data_cleaning`.`nashville housing`;
 
 ALTER TABLE `data_cleaning`.`nashville housing`
-Add PropertySplitAddress Nvarchar(255);
+Add Column property_split_address Varchar(255);
 
 Update `data_cleaning`.`nashville housing`
-SET PropertySplitAddress = SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress) -1 )
+SET property_split_address = SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress) -1 )
 
 
 ALTER TABLE `data_cleaning`.`nashville housing`
-Add PropertySplitCity Nvarchar(255);
+Add Column property_split_city Varchar(255);
 
 Update `data_cleaning`.`nashville housing`
-SET PropertySplitCity =  SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAddress))
+SET property_split_city =  SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAddress))
 
 
 SELECT OwnerAddress,
@@ -68,22 +68,22 @@ Right(OwnerAddress,2) as State
 FROM `data_cleaning`.`nashville housing`;
 
 ALTER TABLE `data_cleaning`.`nashville housing`
-Add Address Nvarchar(255);
+Add Column address Varchar(255);
 
 Update `data_cleaning`.`nashville housing`
-SET Address = SUBSTRING(OwnerAddress, 1, LOCATE(',', OwnerAddress) -1 ) 
+SET address = SUBSTRING(OwnerAddress, 1, LOCATE(',', OwnerAddress) -1 ) 
 
 ALTER TABLE `data_cleaning`.`nashville housing`
-Add City Nvarchar(255);
+Add Column city Varchar(255);
 
 Update `data_cleaning`.`nashville housing`
-SET City =  SUBSTRING(OwnerAddress, LOCATE(',', OwnerAddress) + 1 , INSTR(OwnerAddress, RIGHT(OwnerAddress,3)))
+SET city =  SUBSTRING(OwnerAddress, LOCATE(',', OwnerAddress) + 1 , INSTR(OwnerAddress, RIGHT(OwnerAddress,3)))
 
 ALTER TABLE `data_cleaning`.`nashville housing`
-Add State Nvarchar(255);
+Add Column state varchar(255);
 
 Update `data_cleaning`.`nashville housing`
-SET State =  Right(OwnerAddress,2)
+SET state =  Right(OwnerAddress,2)
 
 -- Change Yes and No to Y and N in "Sold as Vacant" field
 
@@ -94,10 +94,10 @@ SELECT DISTINCT SoldAsVacant ,replace(SoldAsVacant,'No','N') ,replace(SoldAsVaca
 FROM `data_cleaning`.`nashville housing`;
 
 Update `data_cleaning`.`nashville housing`
-SET SoldAsVacant =  REPLACE(SoldAsVacant,'No','N')
+SET sold_as_vacant =  REPLACE(SoldAsVacant,'No','N')
 
 Update `data_cleaning`.`nashville housing`
-SET SoldAsVacant =  REPLACE(SoldAsVacant,'Yes','Y')
+SET sold_as_vacant =  REPLACE(SoldAsVacant,'Yes','Y')
 
 
 
@@ -148,6 +148,6 @@ Order by PropertyAddress
 
 
 
-ALTER TABLE PortfolioProject.dbo.NashvilleHousing
+ALTER TABLE `data_cleaning`.`nashville housing`
 DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate
 
